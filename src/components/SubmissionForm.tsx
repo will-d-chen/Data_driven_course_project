@@ -100,7 +100,7 @@ export function SubmissionForm() {
                         </div>
                     </div>
 
-                    <Button type="submit" className="w-full" disabled={loading || !file || !teamName}>
+                    <Button variant="outline" type="submit" className="w-full" disabled={loading || !file || !teamName}>
                         {loading ? "Calculating RMSE..." : "Submit Prediction"}
                     </Button>
                 </form>

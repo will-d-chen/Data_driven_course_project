@@ -3,9 +3,9 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-duke-blue: #001A57;
+  --color-duke-blue: #01123a;
   --color-duke-light: #B6C0D9;
-  --color-duke-bg: #00133f;
+  --color-duke-bg: #01123a;
 }
 
 :root {
