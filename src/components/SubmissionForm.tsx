@@ -48,8 +48,8 @@ export function SubmissionForm() {
     }
 
     return (
-        <Card className="w-full max-w-md mx-auto relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 z-0 pointer-events-none" />
+        <Card className="w-full max-w-md mx-auto relative overflow-hidden bg-white/5 backdrop-blur-sm border-duke-light/10 shadow-md">
+            <div className="absolute inset-0 bg-gradient-to-br from-duke-light/5 to-duke-bg/5 z-0 pointer-events-none" />
             <CardHeader className="relative z-10">
                 <CardTitle>Submit Predictions</CardTitle>
                 <CardDescription>
@@ -82,16 +82,16 @@ export function SubmissionForm() {
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                             />
                             <div className={cn(
-                                "flex flex-col items-center justify-center w-full h-32 rounded-md border-2 border-dashed border-gray-700 bg-zinc-900/50 transition-colors group-hover:bg-zinc-900/80 group-hover:border-blue-500",
-                                file ? "border-blue-500 bg-blue-500/10" : ""
+                                "flex flex-col items-center justify-center w-full h-32 rounded-md border-2 border-dashed border-duke-light/20 bg-black/20 transition-colors group-hover:bg-black/40 group-hover:border-duke-light/40",
+                                file ? "border-duke-light/50 bg-duke-light/10" : ""
                             )}>
                                 {file ? (
-                                    <div className="flex items-center space-x-2 text-blue-400">
+                                    <div className="flex items-center space-x-2 text-duke-light">
                                         <CheckCircle className="w-6 h-6" />
                                         <span className="text-sm font-medium truncate max-w-[200px]">{file.name}</span>
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col items-center space-y-2 text-gray-400">
+                                    <div className="flex flex-col items-center space-y-2 text-duke-light/50 group-hover:text-duke-light/80">
                                         <Upload className="w-8 h-8" />
                                         <span className="text-xs">Drag & drop or click to upload</span>
                                     </div>
@@ -141,8 +141,8 @@ export function SubmissionForm() {
 function ScoreCard({ label, score }: { label: string, score: number | string }) {
     if (typeof score === 'string') return null; // Handle potential errors or "N/A" nicely if needed
     return (
-        <div className="bg-zinc-900 border border-zinc-800 p-2 rounded text-center">
-            <div className="text-xs text-zinc-500 mb-1">{label}</div>
+        <div className="bg-black/30 border border-duke-light/10 p-2 rounded text-center shadow-sm">
+            <div className="text-xs text-duke-light/60 mb-1">{label}</div>
             <div className="text-lg font-bold text-white tracking-tight">
                 {Number(score).toFixed(2)}
             </div>

@@ -3,28 +3,31 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-duke-blue: #001A57;
+  --color-duke-light: #B6C0D9;
+  --color-duke-bg: #00133f;
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  
+  --background: var(--color-duke-bg);
+  --foreground: var(--color-duke-blue);
+
   /* Premium Accents */
-  --primary: #3b82f6;
+  --primary: var(--color-duke-blue);
   --primary-foreground: #ffffff;
-  
-  --secondary: #1e1e1e;
-  --secondary-foreground: #a1a1aa;
-  
-  --accent: #2563eb;
-  --accent-foreground: #ffffff;
-  
-  --card: #171717;
-  --card-foreground: #ededed;
-  
-  --border: #262626;
-  --input: #262626;
-  --ring: #3b82f6;
+
+  --secondary: #ffffff;
+  --secondary-foreground: var(--color-duke-blue);
+
+  --accent: var(--color-duke-light);
+  --accent-foreground: var(--color-duke-blue);
+
+  --card: #ffffff;
+  --card-foreground: var(--color-duke-blue);
+
+  --border: var(--color-duke-light);
+  --input: #ffffff;
+  --ring: var(--color-duke-blue);
 }
 
 body {
@@ -35,13 +38,13 @@ body {
 
 /* Glassmorphism Utilities */
 .glass {
-  background: rgba(23, 23, 23, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 26, 87, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(182, 192, 217, 0.1);
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  background: linear-gradient(to right, var(--color-duke-blue), #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

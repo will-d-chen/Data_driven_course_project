@@ -26,21 +26,37 @@ function loadGroundTruth(): number[] {
     try {
         const fileContent = fs.readFileSync(GROUND_TRUTH_PATH, 'utf8');
         const lines = fileContent.trim().split('\n');
-        const allTemperatures: number[] = [];
+
+        const validTemperatures: number[] = [];
+        let startFound = false;
 
         // Skip header
         for (let i = 1; i < lines.length; i++) {
             const cols = lines[i].split(',');
-            // Temperature is index 4
-            const temp = parseFloat(cols[4]);
-            if (!isNaN(temp)) {
-                allTemperatures.push(temp);
+            // Header: day,time,humidity,pressure,temperature,weather_description,wind_direction,wind_speed
+            // Index 0: day
+            // Index 4: temperature
+
+            const day = parseInt(cols[0]);
+
+            // The competition/forecast starts on Day 1828
+            if (!isNaN(day) && day >= 1828) {
+                startFound = true;
+            }
+
+            if (startFound) {
+                const temp = parseFloat(cols[4]);
+                if (!isNaN(temp)) {
+                    validTemperatures.push(temp);
+                }
             }
         }
 
-        // Return last 1440 points (60 days * 24 hours)
-        const sliceSize = 60 * 24;
-        return allTemperatures.slice(-sliceSize);
+        if (!startFound && lines.length > 1) {
+            console.warn("Warning: Day 1828 not found in ground_truth.csv. Scoring may be incorrect.");
+        }
+
+        return validTemperatures;
     } catch (error) {
         console.error("Error loading ground truth:", error);
         return [];
@@ -55,6 +71,10 @@ export function calculateScores(predictions: number[]) {
     }
 
     const limit = Math.min(predictions.length, groundTruth.length);
+
+    if (predictions.length > groundTruth.length) {
+        console.warn(`Warning: Prediction length (${predictions.length}) exceeds available ground truth (${groundTruth.length}). Scoring based on available ground truth only.`);
+    }
 
     if (limit < 240) {
         throw new Error("Submission too short. Require at least 10 days (240 hours) of predictions.");
