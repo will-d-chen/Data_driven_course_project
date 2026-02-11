@@ -11,7 +11,9 @@
     "reset-leaderboard": "node scripts/reset_leaderboard.js"
   },
   "dependencies": {
+    "@vercel/blob": "^2.2.0",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.4",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",

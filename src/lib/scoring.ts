@@ -1,16 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
 
-// Determine storage path
-// In production (Vercel), we must use /tmp for write access.
-// In development, we use the local project folder so the user can see the file.
-const isProduction = process.env.NODE_ENV === 'production';
-const DATA_DIR = isProduction ? os.tmpdir() : path.join(process.cwd(), 'src/lib/data');
+import { put, list, del } from '@vercel/blob';
 
 const GROUND_TRUTH_PATH = path.join(process.cwd(), 'src/lib/data/ground_truth.csv'); // Always read from source
-const LEADERBOARD_FILE = 'leaderboard.json';
-const LEADERBOARD_PATH = path.join(DATA_DIR, LEADERBOARD_FILE);
 
 // Interface for leaderboard entry
 export interface LeaderboardEntry {
@@ -98,14 +91,16 @@ export function calculateScores(predictions: number[]) {
 }
 
 export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
-    if (!fs.existsSync(LEADERBOARD_PATH)) {
-        return [];
-    }
     try {
-        const data = fs.readFileSync(LEADERBOARD_PATH, 'utf8');
-        const entries: LeaderboardEntry[] = JSON.parse(data);
-        return entries.sort((a, b) => a.rmse_60 - b.rmse_60);
+        const { blobs } = await list({ prefix: 'leaderboard.json', limit: 1 });
+        if (blobs.length > 0) {
+            const response = await fetch(blobs[0].url);
+            const entries: LeaderboardEntry[] = await response.json();
+            return entries.sort((a, b) => a.rmse_60 - b.rmse_60);
+        }
+        return [];
     } catch (e) {
+        console.error("Failed to fetch leaderboard from Blob:", e);
         return [];
     }
 }
@@ -119,11 +114,15 @@ export async function saveEntry(entry: LeaderboardEntry) {
     // Sort
     newEntries.sort((a, b) => a.rmse_60 - b.rmse_60);
 
-    fs.writeFileSync(LEADERBOARD_PATH, JSON.stringify(newEntries, null, 2));
+    await put('leaderboard.json', JSON.stringify(newEntries, null, 2), {
+        access: 'public',
+        addRandomSuffix: false // Overwrite the existing file
+    });
 }
 
 export async function resetLeaderboard() {
-    if (fs.existsSync(LEADERBOARD_PATH)) {
-        fs.unlinkSync(LEADERBOARD_PATH);
+    const { blobs } = await list({ prefix: 'leaderboard.json', limit: 1 });
+    if (blobs.length > 0) {
+        await del(blobs[0].url);
     }
 }
