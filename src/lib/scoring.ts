@@ -116,7 +116,9 @@ export async function saveEntry(entry: LeaderboardEntry) {
 
     await put('leaderboard.json', JSON.stringify(newEntries, null, 2), {
         access: 'public',
-        addRandomSuffix: false // Overwrite the existing file
+        addRandomSuffix: false, // Overwrite the existing file
+        token: process.env.BLOB_READ_WRITE_TOKEN, // Required for server-side writes
+        allowOverwrite: true // Explicitly allow overwriting
     });
 }
 

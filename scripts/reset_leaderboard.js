@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env.local' });
 const { list, del } = require('@vercel/blob');
 const fs = require('fs');
 const path = require('path');
