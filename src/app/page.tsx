@@ -109,7 +109,7 @@ disp(head(data))`}
       </main>
 
       <footer className="border-t border-duke-light/10 py-8 text-center text-duke-light/40 text-sm">
-        <p>&copy; 2026</p>
+        <p>&copy; 2026 Dynamical Systems Lab</p>
       </footer>
     </div>
   )
