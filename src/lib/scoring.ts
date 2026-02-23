@@ -70,7 +70,7 @@ export function calculateScores(predictions: number[]) {
     }
 
     if (limit < 1439) {
-        throw new Error("Submission too short. Require at least 10 days (240 hours) of predictions.");
+        throw new Error("Submission too short. Require at least 60 days (1440 hours) of predictions.");
     }
 
     const calcRMSE = (n: number) => {
