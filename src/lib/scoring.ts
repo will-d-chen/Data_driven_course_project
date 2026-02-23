@@ -69,7 +69,7 @@ export function calculateScores(predictions: number[]) {
         console.warn(`Warning: Prediction length (${predictions.length}) exceeds available ground truth (${groundTruth.length}). Scoring based on available ground truth only.`);
     }
 
-    if (limit < 240) {
+    if (limit < 1439) {
         throw new Error("Submission too short. Require at least 10 days (240 hours) of predictions.");
     }
 
