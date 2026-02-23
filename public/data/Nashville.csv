@@ -1,5 +1,4 @@
 day,time,humidity,pressure,temperature,weather_description,wind_direction,wind_speed
-1,12:00:00,,,,,,
 1,13:00:00,100.0,1005.0,287.41,mist,70.0,4.0
 1,14:00:00,99.0,1004.0,287.42136028,overcast clouds,70.0,4.0
 1,15:00:00,99.0,1004.0,287.454636935,overcast clouds,70.0,4.0
@@ -43834,4 +43833,4 @@ day,time,humidity,pressure,temperature,weather_description,wind_direction,wind_s
 1827,20:00:00,34.0,1020.0,299.53,sky is clear,120.0,4.0
 1827,21:00:00,34.0,1019.0,299.74,scattered clouds,100.0,3.0
 1827,22:00:00,36.0,1019.0,299.35,few clouds,0.0,2.0
-1827,23:00:00,36.0,1019.0,298.94,sky is clear,0.0,2.0
+1827,23:00:00,36.0,1019.0,298.94,sky is clear,0.0,2.0
