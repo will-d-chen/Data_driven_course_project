@@ -26,9 +26,12 @@ export default function Home() {
                 Download Dataset
               </Button>
             </a>
-            <Button variant="outline" size="lg" className="h-12 px-8 text-base">
-              View Project PDF
-            </Button>
+            <a href="/Final_Project_Data_Driven.pdf" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="lg" className="h-12 px-8 text-base">
+                <Download className="mr-2 h-5 w-5" />
+                View Project PDF
+              </Button>
+            </a>
           </div>
         </div>
       </section>
@@ -79,7 +82,7 @@ disp(head(data))`}
         </section>
 
         {/* Main Interface Grid */}
-        <section className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+        <section className="grid grid-cols-1 gap-12 items-start max-w-4xl mx-auto">
           <div className="space-y-8">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tight text-white">Submit Your Model</h2>
@@ -97,12 +100,7 @@ disp(head(data))`}
           </div>
 
           <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl font-bold tracking-tight text-white">Live Leaderboard</h2>
-              <p className="text-duke-light/70">
-                Rankings based on the Root Mean Squared Error (RMSE) for the 60-day prediction window.
-              </p>
-            </div>
+
             <Leaderboard />
           </div>
         </section>

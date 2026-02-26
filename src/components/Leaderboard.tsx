@@ -71,15 +71,27 @@ export function Leaderboard() {
                                     </td>
                                 </tr>
                             ) : (
-                                entries.map((entry, index) => (
-                                    <tr key={index} className="hover:bg-white/5 transition-colors">
-                                        <td className="p-3 text-duke-light/60 font-mono">#{index + 1}</td>
-                                        <td className="p-3 font-medium text-white">{entry.teamName}</td>
-                                        <td className="p-3 text-right text-duke-light/70">{entry.rmse_10.toFixed(3)}</td>
-                                        <td className="p-3 text-right text-duke-light/70">{entry.rmse_30.toFixed(3)}</td>
-                                        <td className="p-3 text-right font-bold text-duke-light">{entry.rmse_60.toFixed(3)}</td>
-                                    </tr>
-                                ))
+                                entries.map((entry, index) => {
+                                    const titles: Record<number, string> = {
+                                        0: 'The Weather Wizard',
+                                        1: 'Baron Von Barometer',
+                                        2: 'Predictor of Precipitation',
+                                    }
+                                    return (
+                                        <tr key={index} className="hover:bg-white/5 transition-colors">
+                                            <td className="p-3 text-duke-light/60 font-mono">#{index + 1}</td>
+                                            <td className="p-3">
+                                                <span className="font-medium text-white">{entry.teamName}</span>
+                                                {titles[index] && (
+                                                    <span className="block text-xs text-yellow-400/80 italic mt-0.5">{titles[index]}</span>
+                                                )}
+                                            </td>
+                                            <td className="p-3 text-right text-duke-light/70">{entry.rmse_10.toFixed(3)}</td>
+                                            <td className="p-3 text-right text-duke-light/70">{entry.rmse_30.toFixed(3)}</td>
+                                            <td className="p-3 text-right font-bold text-duke-light">{entry.rmse_60.toFixed(3)}</td>
+                                        </tr>
+                                    )
+                                })
                             )}
                         </tbody>
                     </table>
